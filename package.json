@@ -1,0 +1,23 @@
+{
+  "name": "friendcodebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blakewenloe/FriendCodes-2.0.git"
+  },
+  "author": "Blake Enloe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blakewenloe/FriendCodes-2.0/issues"
+  },
+  "homepage": "https://github.com/blakewenloe/FriendCodes-2.0#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  }
+}
