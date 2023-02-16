@@ -3,7 +3,7 @@ module.exports = {
   name: "ready",
   once: true,
   execute(client) {
-    db.sync({ force: true });
+    db.sync();
     console.log(`Ready! Logged in as ${client.user.tag}`);
   },
 };

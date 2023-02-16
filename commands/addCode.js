@@ -24,8 +24,8 @@ module.exports = {
         ephemeral: true,
       });
     } catch (error) {
-      if (error.errors[0].type === "unique violation") {
-        await interaction.editReply({
+      if (error.name === "SequelizeUniqueConstraintError") {
+        return interaction.editReply({
           content:
             `Friend code for <@${userId}> already exists! Try ` +
             "`" +
@@ -39,6 +39,8 @@ module.exports = {
           ephemeral: true,
         });
       }
+
+      return interaction.reply("Something went wrong with adding a tag.");
     }
   },
 };
