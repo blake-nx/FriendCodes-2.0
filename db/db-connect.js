@@ -26,6 +26,13 @@ const User = sequelize.define(
         len: [12, 20],
       },
     },
+    switch_code: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      validate: {
+        is: /^SW-\d{4}-\d{4}-\d{4}$/i,
+      },
+    },
   },
   {
     tableName: "friends",
