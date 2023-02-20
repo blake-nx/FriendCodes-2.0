@@ -21,7 +21,7 @@ const User = sequelize.define(
     },
     friend_code: {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [12, 20],
       },
