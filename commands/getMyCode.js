@@ -14,9 +14,7 @@ module.exports = {
       const friendcode = await User.findOne({ where: { handle: handle } });
       if (friendcode) {
         return await interaction.editReply({
-          content: `<@${userId}>'s friend code is ${friendcode.get(
-            "friend_code"
-          )}`,
+          content: `${friendcode.get("friend_code")}`,
           ephemeral: false,
         });
       }
