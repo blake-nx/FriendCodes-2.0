@@ -11,7 +11,7 @@ module.exports = {
         .setDescription("Tag your friend (they won't get notified)")
     ),
   async execute(interaction) {
-    await interaction.deferReply();
+    await interaction.deferReply({ ephemeral: true });
     const userId = await interaction.options.getUser("friend").id;
     const username = await interaction.options.getUser("friend").username;
     const discriminator = await interaction.options.getUser("friend")

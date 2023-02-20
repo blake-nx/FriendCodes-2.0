@@ -6,7 +6,7 @@ module.exports = {
     .setName("deletecode")
     .setDescription("Delete your code from the bot"),
   async execute(interaction) {
-    await interaction.deferReply();
+    await interaction.deferReply({ ephemeral: true });
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
     try {

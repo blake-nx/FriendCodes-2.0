@@ -6,7 +6,7 @@ module.exports = {
     .setName("mycode")
     .setDescription("This posts your friend code!"),
   async execute(interaction) {
-    await interaction.deferReply();
+    await interaction.deferReply({ ephemeral: false });
     const handle = interaction.user.tag;
     const userId = interaction.user.id;
 

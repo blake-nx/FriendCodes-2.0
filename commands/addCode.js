@@ -12,7 +12,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    await interaction.deferReply();
+    await interaction.deferReply({ ephemeral: true });
     const code = interaction.options.getString("friendcode");
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
