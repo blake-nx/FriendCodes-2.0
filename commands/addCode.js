@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
 const User = require("../db/db-connect.js");
-const wait = require("node:timers/promises").setTimeout;
 
 module.exports = {
   data: new SlashCommandBuilder()
