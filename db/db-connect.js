@@ -28,7 +28,7 @@ const User = sequelize.define(
     },
     switch_code: {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       validate: {
         is: /^SW-\d{4}-\d{4}-\d{4}$/i,
       },
