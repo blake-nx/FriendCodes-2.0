@@ -28,7 +28,7 @@ module.exports = {
         });
       }
       await interaction.editReply({
-        content: `No friend code found for <@${userId}>`,
+        content: `Something went wrong with adding your code. Friend code doesn't exist or code length exceeds limit.`,
         ephemeral: true,
       });
     } catch (error) {

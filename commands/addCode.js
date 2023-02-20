@@ -17,11 +17,17 @@ module.exports = {
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
     try {
-      await User.create({ handle: handle, friend_code: code });
-      await interaction.editReply({
-        content: "friend code " + "`" + code + "`" + ` added for <@${userId}>!`,
-        ephemeral: true,
-      });
+      let addCode = await User.create({ handle: handle, friend_code: code });
+      if (!addCode === 0) {
+        return await interaction.editReply({
+          content:
+            "friend code " + "`" + code + "`" + ` added for <@${userId}>!`,
+          ephemeral: true,
+        });
+      }
+      return interaction.reply(
+        "Something went wrong with adding your code. Friend code doesn't exist or code length exceeds limit"
+      );
     } catch (error) {
       if (error.name === "SequelizeUniqueConstraintError") {
         return interaction.editReply({
@@ -38,8 +44,6 @@ module.exports = {
           ephemeral: true,
         });
       }
-
-      return interaction.reply("Something went wrong with adding your code.");
     }
   },
 };
