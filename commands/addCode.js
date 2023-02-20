@@ -39,7 +39,7 @@ module.exports = {
         });
       }
 
-      return interaction.reply("Something went wrong with adding a tag.");
+      return interaction.reply("Something went wrong with adding your code.");
     }
   },
 };
