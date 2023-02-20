@@ -20,7 +20,7 @@ const User = sequelize.define(
       unique: true,
     },
     friend_code: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(20),
       allowNull: false,
     },
   },
