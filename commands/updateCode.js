@@ -32,7 +32,12 @@ module.exports = {
         ephemeral: true,
       });
     } catch (error) {
-      console.log(error);
+      if (error.name === "SequelizeValidationError") {
+        return interaction.editReply({
+          content: `Friend code is either too short or too long!`,
+          ephemeral: true,
+        });
+      }
     }
   },
 };
