@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const User = require("../db/db-connect.js");
+const User = require("../../db/db-connect.js");
 
 function formatFriendCode(code) {
   // Remove dashes and spaces from the code

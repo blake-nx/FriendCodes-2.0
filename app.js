@@ -30,14 +30,22 @@ for (const file of eventFiles) {
 }
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs
-  .readdirSync(commandsPath)
-  .filter((file) => file.endsWith(".js"));
+const subdirs = fs
+  .readdirSync(commandsPath, { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name);
 
-for (const file of commandFiles) {
-  const filePath = path.join(commandsPath, file);
-  const command = require(filePath);
-  client.commands.set(command.data.name, command);
+for (const subdir of subdirs) {
+  const subdirPath = path.join(commandsPath, subdir);
+  const commandFiles = fs
+    .readdirSync(subdirPath)
+    .filter((file) => file.endsWith(".js"));
+
+  for (const file of commandFiles) {
+    const filePath = path.join(subdirPath, file);
+    const command = require(filePath);
+    client.commands.set(command.data.name, command);
+  }
 }
 
 client.login(token);
