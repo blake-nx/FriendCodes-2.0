@@ -14,6 +14,7 @@ const client = new Client({
   ],
 });
 
+// import client events functions from the /events directory
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
   .readdirSync(eventsPath)
@@ -28,6 +29,8 @@ for (const file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args));
   }
 }
+
+// recursively read all command files in the /commands directory and its subdirectories
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
 const subdirs = fs
