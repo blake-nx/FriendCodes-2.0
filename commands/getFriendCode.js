@@ -17,14 +17,13 @@ module.exports = {
     const discriminator = await interaction.options.getUser("friend")
       .discriminator;
     const handle = `${username}#${discriminator}`;
-
+    const friendcode = await User.findOne({ where: { handle: handle } });
     if (username && discriminator) {
       try {
-        const friendcode = await User.findOne({ where: { handle: handle } });
-        if (friendcode) {
+        if (friendcode.get("friend_code") !== null) {
           return await interaction.editReply({
-            content: `${friendcode.get("friend_code").split("-").join(" ")}`,
-            ephemeral: true,
+            content: `${friendcode.get("friend_code")}`,
+            ephemeral: false,
           });
         }
         return await interaction.editReply({

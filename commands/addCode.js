@@ -27,11 +27,20 @@ module.exports = {
     const code = interaction.options.getString("friendcode");
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
+    const userExists = await User.findOne({ where: { handle: handle } });
+    let addCode;
     try {
-      let addCode = await User.create({
-        handle: handle,
-        friend_code: formatFriendCode(code),
-      });
+      if (!userExists) {
+        addCode = await User.create({
+          handle: handle,
+          friend_code: formatFriendCode(code),
+        });
+      } else {
+        addCode = await User.update(
+          { friend_code: formatFriendCode(code) },
+          { where: { handle: handle } }
+        );
+      }
       if (addCode !== 0) {
         return await interaction.editReply({
           content:

@@ -12,7 +12,7 @@ module.exports = {
 
     try {
       const friendcode = await User.findOne({ where: { handle: handle } });
-      if (friendcode) {
+      if (friendcode.get("friend_code") !== null) {
         return await interaction.editReply({
           content: `${friendcode.get("friend_code")}`,
           ephemeral: false,
