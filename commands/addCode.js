@@ -1,6 +1,17 @@
 const { SlashCommandBuilder } = require("discord.js");
 const User = require("../db/db-connect.js");
 
+function formatFriendCode(code) {
+  // Remove dashes and spaces from the code
+  const cleanedCode = code.replace(/[-\s]/g, "");
+
+  // Split the cleaned string into groups of 4 characters each
+  const groups = cleanedCode.match(/.{1,4}/g);
+
+  // Join the groups with spaces and return the formatted string e.g. 1234 5678 9012.
+  return groups.join(" ");
+}
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("addcode")
@@ -17,7 +28,10 @@ module.exports = {
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
     try {
-      let addCode = await User.create({ handle: handle, friend_code: code });
+      let addCode = await User.create({
+        handle: handle,
+        friend_code: formatFriendCode(code),
+      });
       if (addCode !== 0) {
         return await interaction.editReply({
           content:
@@ -26,6 +40,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      console.log(error);
       if (error.name === "SequelizeUniqueConstraintError") {
         return interaction.editReply({
           content:
@@ -40,10 +55,14 @@ module.exports = {
             "to remove it",
           ephemeral: true,
         });
-      }
-      if (error.name === "SequelizeValidationError") {
+      } else if (error.errors[0].type === "Validation error") {
         return interaction.editReply({
-          content: `Friend code is either too short or too long!`,
+          content: `${error.errors[0].message}. Please try again <:ttar:711069119184764928>`,
+          ephemeral: true,
+        });
+      } else {
+        return interaction.editReply({
+          content: `Whoops! Something went wrong with adding your code. Please try again <:ttar:711069119184764928>`,
           ephemeral: true,
         });
       }

@@ -23,14 +23,24 @@ const User = sequelize.define(
       type: DataTypes.STRING(20),
       allowNull: true,
       validate: {
-        len: [12, 20],
+        len: {
+          args: [10, 18],
+          msg: "Your friend code must be between 12 and 20 numbers.",
+        },
+        is: {
+          args: /^[\d\s\-]+$/i,
+          msg: "Friend code must only contain numbers.",
+        },
       },
     },
     switch_code: {
       type: DataTypes.STRING(20),
       allowNull: true,
       validate: {
-        is: /^SW-\d{4}-\d{4}-\d{4}$/i,
+        is: {
+          args: /^SW-\d{4}-\d{4}-\d{4}$/i,
+          msg: "Switch code must match SW-xxxx-xxxx-xxxx format.",
+        },
       },
     },
   },
