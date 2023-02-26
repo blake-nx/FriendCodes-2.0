@@ -3,8 +3,8 @@ const User = require("../../db/db-connect.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("getcode")
-    .setDescription("Tag a friend to get their friend code!")
+    .setName("get-pogocode")
+    .setDescription("Tag a friend to get their Pokemong Go friend code!")
     .addUserOption((option) =>
       option
         .setName("friend")
@@ -27,7 +27,7 @@ module.exports = {
           });
         }
         return await interaction.editReply({
-          content: `No friend code found for <@${userId}>`,
+          content: `No friend code found for <@${userId}> <:ttar:711069119184764928>`,
           ephemeral: true,
         });
       } catch (error) {

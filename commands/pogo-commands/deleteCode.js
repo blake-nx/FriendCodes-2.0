@@ -3,7 +3,7 @@ const User = require("../../db/db-connect.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("deletecode")
+    .setName("delete-pogocode")
     .setDescription("Delete your code from the bot"),
   async execute(interaction) {
     await interaction.deferReply({ ephemeral: true });
@@ -24,7 +24,7 @@ module.exports = {
         }
       } else {
         await interaction.editReply({
-          content: `No friend code found for <@${userId}>`,
+          content: `No friend code found for <@${userId}> <:ttar:711069119184764928>`,
           ephemeral: true,
         });
       }

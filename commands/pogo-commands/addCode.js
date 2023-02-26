@@ -14,8 +14,8 @@ function formatFriendCode(code) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("addcode")
-    .setDescription("Add your friend code to the bot for others to see")
+    .setName("add-pogocode")
+    .setDescription("Add your Pokemon Go friend code for easy sharing!")
     .addStringOption((option) =>
       option
         .setName("friendcode")
