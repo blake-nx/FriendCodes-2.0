@@ -33,7 +33,7 @@ module.exports = {
         // If the user has a friend code, edit the reply with their friend code
         if (switchcode.get("switch_code") !== null) {
           return await interaction.editReply({
-            content: `${friendcode.get("switch_code")}`,
+            content: `${switchcode.get("switch_code")}`,
             ephemeral: false,
           });
         }
