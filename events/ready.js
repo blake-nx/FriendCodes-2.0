@@ -1,4 +1,7 @@
 const db = require("../db/db-connect.js");
+
+// This script exports an object with an event listener function that is
+// triggered once when the Discord bot has finished logging in.
 module.exports = {
   name: "ready",
   once: true,

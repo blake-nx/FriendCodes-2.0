@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const dotenv = require("dotenv").config();
 
+// Create a new instance of Sequelize and connect to the PostgreSQL database using the DATABASE_URL in the .env file
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
   protocol: "postgres",
@@ -10,10 +11,14 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   },
 });
 
+// User model that's used to interact with the "friends" table in the database
 const User = sequelize.define(
   "User",
   {
-    // Model attributes are defined here
+    // Model attributes are defined here.
+    // The "handle" attribute is the Discord user's tag, and is used as the primary key for the table
+    // The "friend_code" attribute is the user's Pokemon Go friend code
+    // The "switch_code" attribute is the user's Nintendo Switch friend code
     handle: {
       type: DataTypes.STRING,
       allowNull: false,

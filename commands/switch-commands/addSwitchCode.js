@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require("discord.js");
 const User = require("../../db/db-connect.js");
 
+// Export an object with a "data" property that defines a SlashCommandBuilder object
+// with the name and description of the slash command, and a string option for the new friend code
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("add-switchcode")
@@ -13,14 +15,23 @@ module.exports = {
         )
         .setRequired(true)
     ),
+  // async function that handles the execution of the slash command
   async execute(interaction) {
+    // Defer the reply to the interaction with the "ephemeral" flag set to true to hide the reply from other users.
     await interaction.deferReply({ ephemeral: true });
+
+    // Get the handle, user ID, and new friend code from the interaction options
     const code = interaction.options.getString("friendcode");
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
+
+    // Check if the user already exists in the database
     const userExists = await User.findOne({ where: { handle: handle } });
-    let addCode;
+
     try {
+      // If the user does not exist, create a new user with the given friend code
+      // else the user already exists, update their friend code in the database
+      let addCode;
       if (!userExists) {
         addCode = await User.create({
           handle: handle,
@@ -32,6 +43,8 @@ module.exports = {
           { where: { handle: handle } }
         );
       }
+
+      // If the code was added or updated successfully, reply to the user with a success message
       if (addCode !== 0) {
         return await interaction.editReply({
           content:
@@ -45,6 +58,7 @@ module.exports = {
       }
     } catch (error) {
       console.log(error);
+      // Return validation errors if the friend code is not unique or is not in the correct format
       if (error.name === "SequelizeUniqueConstraintError") {
         return interaction.editReply({
           content:

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const User = require("../../db/db-connect.js");
 
+// Format friend code before saving to database
 function formatFriendCode(code) {
   // Remove dashes and spaces from the code
   const cleanedCode = code.replace(/[-\s]/g, "");
@@ -12,6 +13,8 @@ function formatFriendCode(code) {
   return groups.join(" ");
 }
 
+// Export an object with a "data" property that defines a SlashCommandBuilder object
+// with the name, description, and option of the slash command
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("add-pogocode")
@@ -22,14 +25,23 @@ module.exports = {
         .setDescription("Add your Pokemon Go friend code!")
         .setRequired(true)
     ),
+  // an async function that handles the execution of the slash command
   async execute(interaction) {
+    // Defer the reply to the interaction with the "ephemeral" flag set to true to hide the reply from other users.
     await interaction.deferReply({ ephemeral: true });
+
+    // Get the friend code, user ID, and user tag from the interaction
     const code = interaction.options.getString("friendcode");
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
+
+    // Check if the user exists in the database
     const userExists = await User.findOne({ where: { handle: handle } });
-    let addCode;
+
     try {
+      let addCode;
+      // If the user does not exist, create a new user record in the database with the friend code.
+      // else the user already exists, update their friend code in the database
       if (!userExists) {
         addCode = await User.create({
           handle: handle,
@@ -41,6 +53,8 @@ module.exports = {
           { where: { handle: handle } }
         );
       }
+
+      // If the add/update operation was successful, edit the reply with a success message
       if (addCode !== 0) {
         return await interaction.editReply({
           content:
@@ -54,6 +68,8 @@ module.exports = {
       }
     } catch (error) {
       console.log(error);
+
+      // Return validation errors if the friend code is not unique or is not in the correct format
       if (error.name === "SequelizeUniqueConstraintError") {
         return interaction.editReply({
           content:
