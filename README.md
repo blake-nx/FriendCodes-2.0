@@ -1,6 +1,6 @@
 # FriendCodes-2.0
 With this revamped friend codes bot, you can easily store and share your Pokemon Go and Nintendo Switch friend codes with all your friends on Discord! This bot uses slash commands so as to not clutter up the chat.
-:star2: :partying_face: :star2: 
+
 ![2023-02-25_21h01_26](https://user-images.githubusercontent.com/13428576/221390067-cf77b541-f413-476a-907a-a577f35219f8.png)
 
 ## Features :nerd_face:
