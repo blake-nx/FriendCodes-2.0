@@ -8,7 +8,9 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("friendcode")
-        .setDescription("Add your updated friend code!")
+        .setDescription(
+          "Add your updated Nintendo Switch friend code! ex: SW-1234-5678-9012"
+        )
         .setRequired(true)
     ),
   async execute(interaction) {
