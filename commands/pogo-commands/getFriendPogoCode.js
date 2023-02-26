@@ -27,7 +27,7 @@ module.exports = {
           });
         }
         return await interaction.editReply({
-          content: `No friend code found for <@${userId}> <:ttar:711069119184764928>`,
+          content: `No Pokemon Go friend code found for <@${userId}> <:ttar:711069119184764928>`,
           ephemeral: true,
         });
       } catch (error) {

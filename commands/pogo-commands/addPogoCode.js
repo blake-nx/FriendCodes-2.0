@@ -19,7 +19,7 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("friendcode")
-        .setDescription("Add your friend code!")
+        .setDescription("Add your Pokemon Go friend code!")
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -44,7 +44,11 @@ module.exports = {
       if (addCode !== 0) {
         return await interaction.editReply({
           content:
-            "friend code " + "`" + code + "`" + ` added for <@${userId}>!`,
+            "Pokemon Go friend code " +
+            "`" +
+            code +
+            "`" +
+            ` added for <@${userId}>!`,
           ephemeral: true,
         });
       }
@@ -53,7 +57,7 @@ module.exports = {
       if (error.name === "SequelizeUniqueConstraintError") {
         return interaction.editReply({
           content:
-            `Friend code for <@${userId}> already exists! Try ` +
+            `Pokemon Go friend code for <@${userId}> already exists! Try ` +
             "`" +
             "/update-pogocode" +
             "`" +

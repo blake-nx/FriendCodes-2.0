@@ -3,28 +3,28 @@ const User = require("../../db/db-connect.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("delete-pogocode")
-    .setDescription("Delete your Pokemon Go friend code from the bot"),
+    .setName("delete-switchcode")
+    .setDescription("Delete your Nintendo Switch friend code from the bot"),
   async execute(interaction) {
     await interaction.deferReply({ ephemeral: true });
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
-    const friendcode = await User.findOne({ where: { handle: handle } });
+    const switchcode = await User.findOne({ where: { handle: handle } });
     const deleteCode = await User.update(
-      { friend_code: null },
+      { switch_code: null },
       { where: { handle: handle } }
     );
     try {
-      if (friendcode.get("friend_code") !== null) {
+      if (switchcode.get("switch_code") !== null) {
         if (deleteCode !== 0) {
           return await interaction.editReply({
-            content: `Pokemon Go friend code for <@${userId}> deleted!`,
+            content: `Nintendo Switch friend code for <@${userId}> deleted!`,
             ephemeral: true,
           });
         }
       } else {
         await interaction.editReply({
-          content: `No Pokemon Go friend code found for <@${userId}> <:ttar:711069119184764928>`,
+          content: `No Nintendo Switch friend code found for <@${userId}> <:ttar:711069119184764928>`,
           ephemeral: true,
         });
       }

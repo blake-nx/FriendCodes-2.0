@@ -33,7 +33,11 @@ module.exports = {
       if (addCode !== 0) {
         return await interaction.editReply({
           content:
-            "friend code " + "`" + code + "`" + ` added for <@${userId}>!`,
+            "Nintendo Switch friend code " +
+            "`" +
+            code +
+            "`" +
+            ` added for <@${userId}>!`,
           ephemeral: true,
         });
       }
@@ -42,7 +46,7 @@ module.exports = {
       if (error.name === "SequelizeUniqueConstraintError") {
         return interaction.editReply({
           content:
-            `Friend code for <@${userId}> already exists! Try ` +
+            `Nintendo Switch friend code for <@${userId}> already exists! Try ` +
             "`" +
             "/update-switchcode" +
             "`" +

@@ -19,7 +19,7 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("friendcode")
-        .setDescription("Add your updated friend code!")
+        .setDescription("Add your updated Pokemon Go friend code!")
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -34,7 +34,7 @@ module.exports = {
       );
       if (updateCode !== 0) {
         return await interaction.editReply({
-          content: `friend code updated for <@${userId}>!`,
+          content: `Pokemon Go friend code updated for <@${userId}>!`,
           ephemeral: true,
         });
       }
