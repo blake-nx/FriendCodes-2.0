@@ -18,12 +18,12 @@ module.exports = {
 
     try {
       // Find the user record in the database
-      const switchCode = await User.findOne({ where: { handle: handle } });
+      const switchcode = await User.findOne({ where: { handle: handle } });
 
       // If the user has a friend code, edit the reply with their friend code
       if (switchcode !== null && switchcode.get("switch_code") !== null) {
         return await interaction.editReply({
-          content: `${switchCode.get("switch_code")}`,
+          content: `${switchcode.get("switch_code")}`,
           ephemeral: false,
         });
       }
