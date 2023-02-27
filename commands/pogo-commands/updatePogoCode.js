@@ -1,17 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const User = require("../../db/db-connect.js");
-
-// Format friend code before saving to database
-function formatFriendCode(code) {
-  // Remove dashes and spaces from the code
-  const cleanedCode = code.replace(/[-\s]/g, "");
-
-  // Split the cleaned string into groups of 4 characters each
-  const groups = cleanedCode.match(/.{1,4}/g);
-
-  // Join the groups with spaces and return the formatted string e.g. 1234 5678 9012.
-  return groups.join(" ");
-}
+const { formatFriendCode } = require("../../utils.js");
 
 // Export an object with a "data" property that defines a SlashCommandBuilder object
 // with the name and description of the slash command, and a string option for the new friend code
@@ -34,6 +23,7 @@ module.exports = {
     const userId = interaction.user.id;
     const handle = interaction.user.tag;
     const friendCode = interaction.options.getString("friendcode");
+    console.log("code", formatFriendCode(friendCode));
 
     try {
       // Update the user record in the database with the new friend code
