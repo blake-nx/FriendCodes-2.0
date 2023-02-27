@@ -21,7 +21,7 @@ module.exports = {
       const switchCode = await User.findOne({ where: { handle: handle } });
 
       // If the user has a friend code, edit the reply with their friend code
-      if (switchCode.get("switch_code") !== null) {
+      if (switchcode !== null && switchcode.get("switch_code") !== null) {
         return await interaction.editReply({
           content: `${switchCode.get("switch_code")}`,
           ephemeral: false,

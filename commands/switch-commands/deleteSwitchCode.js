@@ -26,7 +26,7 @@ module.exports = {
 
     try {
       // If the user has a friend code, edit the reply with a success message
-      if (switchcode.get("switch_code") !== null) {
+      if (switchcode !== null && switchcode.get("switch_code") !== null) {
         if (deleteCode !== 0) {
           return await interaction.editReply({
             content: `Nintendo Switch friend code for <@${userId}> deleted!`,

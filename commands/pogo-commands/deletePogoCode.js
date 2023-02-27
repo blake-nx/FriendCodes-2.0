@@ -28,7 +28,7 @@ module.exports = {
 
     try {
       // If the user has a friend code, edit the reply with a success message
-      if (friendcode.get("friend_code") !== null) {
+      if (friendcode !== null && friendcode.get("friend_code") !== null) {
         if (deleteCode !== 0) {
           return await interaction.editReply({
             content: `Pokemon Go friend code for <@${userId}> deleted!`,

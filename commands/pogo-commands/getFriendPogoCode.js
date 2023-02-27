@@ -32,7 +32,7 @@ module.exports = {
     if (username && discriminator) {
       try {
         // If the user has a friend code, edit the reply with their friend code
-        if (friendcode.get("friend_code") !== null) {
+        if (friendcode !== null && friendcode.get("friend_code") !== null) {
           return await interaction.editReply({
             content: `${friendcode.get("friend_code")}`,
             ephemeral: false,
